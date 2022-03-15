@@ -1,4 +1,4 @@
-# react-context-form
+# react-context-perf-form
 
 A minimal form library for React built with React Context and validation using Yup that provides better performance.
 
@@ -12,13 +12,13 @@ A minimal form library for React built with React Context and validation using Y
 | validateOnChange | boolean | `false` | Determine if a field should be validated on change in value |
 | initialValues | object | `{}` | Initial values for the form |
 | onSubmit | function | `(values, form: FormContextType) => {}` | Callback function to be called when the form is submitted |
-| validations | object | `{}` | Object containing the validation schema for the form |
+| validations | object | `{}` | Yup Object containing the validation schema for the form |
 | handleFormValueChange | function | `({ fieldName: string; prevValue: any; value: any; form: FormContextType }) => {}` | Callback function to be called when a field value changes |
 
 ### FastField
 
 | Name | Type | Description |
-| - | - |
+| - | - | - |
 | name | string | Name of the field |
 | component | JSX.Element | Component to render for a field |
 
@@ -71,15 +71,19 @@ const handleFormValueChange = ({
   validations={validationSchema} // Yup validation schema
   handleFormValueChange={handleFormValueChange}
 >
-  <FastField
-    name="firstName"
-    component={SomeComponent} 
-    {...props} // SomeComponent's props 
-  />
-  <FastField
-    name="lastName"
-    component={SomeComponent} 
-    {...props} // SomeComponent's props 
-  />
+  {(form: FormContextType) => (
+    <>
+      <FastField
+        name="firstName"
+        component={SomeComponent} 
+        {...props} // SomeComponent's props 
+      />
+      <FastField
+        name="lastName"
+        component={SomeComponent} 
+        {...props} // SomeComponent's props 
+      />
+    </>
+  )}
 </FormProvider>
 ```

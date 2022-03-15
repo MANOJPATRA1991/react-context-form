@@ -1,6 +1,6 @@
 {
-  "name": "react-context-form",
-  "version": "1.0.0",
+  "name": "react-context-perf-form",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
