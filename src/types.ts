@@ -31,9 +31,9 @@ export type FormEffectProps = {
 
 export type FormProviderProps<T> = {
   initialValues: T;
-  validateOnMount: boolean;
-  validateOnChange: boolean;
-  handleFormValueChange: (args: {
+  validateOnMount?: boolean;
+  validateOnChange?: boolean;
+  handleFormValueChange?: (args: {
     fieldName: string;
     prevValue: any;
     value: any;

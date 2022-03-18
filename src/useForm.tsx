@@ -48,8 +48,8 @@ export const useForm = <T extends Record<string, any>>(options: Options<T>) => {
         {},
       );
       setTouchedHelper(newTouched);
-      validateForm(data);
     }
+    validateForm(data);
   }, []);
 
   const validateField = async (key: string, values: T) => {

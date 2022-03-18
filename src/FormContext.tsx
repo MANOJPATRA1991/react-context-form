@@ -33,8 +33,8 @@ const FormContext = createContext<FormContextType>({
  */
 export const FormProvider = <T extends Record<string, any>>({
   initialValues,
-  validateOnMount,
-  validateOnChange,
+  validateOnMount = false,
+  validateOnChange = false,
   handleFormValueChange,
   validations,
   onSubmit,
@@ -79,7 +79,7 @@ export const FormProvider = <T extends Record<string, any>>({
 
   return (
     <FormContext.Provider value={value}>
-      <FormEffect onChange={handleFormValueChange} />
+      {handleFormValueChange && (<FormEffect onChange={handleFormValueChange} />)}
       <Fields
         values={values}
         touched={touched}
