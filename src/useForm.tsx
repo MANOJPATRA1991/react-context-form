@@ -37,22 +37,24 @@ export const useForm = <T extends Record<string, any>>(options: Options<T>) => {
   );
 
   useEffect(() => {
-    /**
-     * If validateOnMount is true:
-     * 1. Validate form on mount
-     * 2. Set all fields to touched
-     */
-    if (options.validateOnMount) {
+    if (options.initialTouched) {
       const newTouched = Object.keys(data).reduce(
         (acc, key) => ({ ...acc, [key]: true }),
         {},
       );
       setTouchedHelper(newTouched);
     }
-    validateForm(data);
+    if (options.validateOnMount) {
+      validateForm(data);
+    }
   }, []);
 
   const validateField = async (key: string, values: T) => {
+    const { fields = {} } = options?.validations ?? {};
+    if (!fields[key]) {
+      return;
+    }
+
     try {
       await options?.validations?.validateAt(key, values);
       const messages = {

@@ -35,6 +35,7 @@ export const FormProvider = <T extends Record<string, any>>({
   initialValues,
   validateOnMount = false,
   validateOnChange = false,
+  initialTouched = false,
   handleFormValueChange,
   validations,
   onSubmit,
@@ -56,6 +57,7 @@ export const FormProvider = <T extends Record<string, any>>({
   } = useForm<T>({
     validateOnMount,
     validateOnChange,
+    initialTouched,
     initialValues: initialValues as T,
     validations,
     onSubmit,

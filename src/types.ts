@@ -33,6 +33,7 @@ export type FormProviderProps<T> = {
   initialValues: T;
   validateOnMount?: boolean;
   validateOnChange?: boolean;
+  initialTouched?: boolean;
   handleFormValueChange?: (args: {
     fieldName: string;
     prevValue: any;
@@ -71,6 +72,7 @@ export type FieldHelperProps = {
 export type Options<T> = {
   validateOnMount?: boolean;
   validateOnChange?: boolean;
+  initialTouched?: boolean;
   onSubmit?: (values: T, form: FormContextType) => void;
   initialValues?: T;
   validations?: Validations<T>;
