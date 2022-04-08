@@ -10,6 +10,7 @@ A minimal form library for React built with React Context and validation using Y
 | - | - | - | - |
 | validateOnMount | boolean | `false` | Determine if the form should run validation on mount |
 | validateOnChange | boolean | `false` | Determine if a field should be validated on change in value |
+| initialTouched | boolean | `false` | Determine if fields will be touched initially |
 | initialValues | object | `{}` | Initial values for the form |
 | onSubmit | function |  | `(values, form: FormContextType) => {}` Callback function to be called when the form is submitted |
 | validations | object | `{}` | Yup Object containing the validation schema for the form |
