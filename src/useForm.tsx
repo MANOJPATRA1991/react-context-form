@@ -28,6 +28,20 @@ export const useForm = <T extends Record<string, any>>(options: Options<T>) => {
     });
   });
 
+  const resetValueHelper = useHelper((valObj: Partial<T>) => {
+    const newTouched: Partial<TouchedRecord<T>> = {};
+    for (const key in valObj) {
+      newTouched[key] = true;
+    }
+    setTouched({ ...newTouched });
+    setErrors({});
+    setData((_: T) => {
+      const next = { ...valObj } as T;
+      options.validateOnChange && validateForm(next);
+      return next;
+    });
+  });
+
   const setErrorsHelper = useHelper((errObj: Partial<ErrorRecord<T>>) =>
     setErrors({ ...errors, ...errObj }),
   );
@@ -37,14 +51,20 @@ export const useForm = <T extends Record<string, any>>(options: Options<T>) => {
   );
 
   useEffect(() => {
-    if (options.initialTouched) {
-      const newTouched = Object.keys(data).reduce(
-        (acc, key) => ({ ...acc, [key]: true }),
-        {},
-      );
-      setTouchedHelper(newTouched);
+    if (options.enableReinitialize) {
+      setData((options.initialValues ?? {}) as T);
     }
+  }, [...Object.values(options.initialValues ?? {})]);
+
+  useEffect(() => {
     if (options.validateOnMount) {
+      if (options.initialTouched) {
+        const newTouched = Object.keys(data).reduce(
+          (acc, key) => ({ ...acc, [key]: true }),
+          {},
+        );
+        setTouchedHelper(newTouched);
+      }
       validateForm(data);
     }
   }, []);
@@ -80,6 +100,7 @@ export const useForm = <T extends Record<string, any>>(options: Options<T>) => {
       await options?.validations?.validate(values, { abortEarly: false });
       setErrors({});
       if (submit) {
+        setIsValid(true);
         submit(values, { setErrors });
       }
     } catch (err) {
@@ -130,6 +151,7 @@ export const useForm = <T extends Record<string, any>>(options: Options<T>) => {
     setValues: setValuesHelper,
     setErrors: setErrorsHelper,
     setTouched: setTouchedHelper,
+    resetValues: resetValueHelper,
     validateForm,
   };
 };

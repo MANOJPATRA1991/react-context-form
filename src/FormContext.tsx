@@ -13,6 +13,7 @@ const FormContext = createContext<FormContextType>({
   setValues: () => {},
   setErrors: () => {},
   setTouched: () => {},
+  resetValues: () => {},
   validateForm: () => new Promise(() => {}),
 });
 
@@ -36,7 +37,8 @@ export const FormProvider = <T extends Record<string, any>>({
   validateOnMount = false,
   validateOnChange = false,
   initialTouched = false,
-  handleFormValueChange,
+  enableReinitialize = false,
+  onFormValueChange,
   validations,
   onSubmit,
   children,
@@ -54,10 +56,12 @@ export const FormProvider = <T extends Record<string, any>>({
     setErrors,
     setTouched,
     validateForm,
+    resetValues,
   } = useForm<T>({
     validateOnMount,
     validateOnChange,
     initialTouched,
+    enableReinitialize,
     initialValues: initialValues as T,
     validations,
     onSubmit,
@@ -74,6 +78,7 @@ export const FormProvider = <T extends Record<string, any>>({
     setErrors,
     setTouched,
     validateForm,
+    resetValues,
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,7 +86,7 @@ export const FormProvider = <T extends Record<string, any>>({
 
   return (
     <FormContext.Provider value={value}>
-      {handleFormValueChange && (<FormEffect onChange={handleFormValueChange} />)}
+      {onFormValueChange && (<FormEffect onChange={onFormValueChange} />)}
       <Fields
         values={values}
         touched={touched}

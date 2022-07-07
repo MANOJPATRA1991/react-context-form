@@ -10,6 +10,7 @@ export type FormContextType = {
   setValues: (args: Partial<any>) => void;
   setErrors: (args: Partial<any>) => void;
   setTouched: (args: Partial<any>) => void;
+  resetValues: (args: Partial<any>) => void;
   validateForm: (
     values: any,
     submit: (values: any, form: any) => void,
@@ -34,7 +35,8 @@ export type FormProviderProps<T> = {
   validateOnMount?: boolean;
   validateOnChange?: boolean;
   initialTouched?: boolean;
-  handleFormValueChange?: (args: {
+  enableReinitialize?: boolean;
+  onFormValueChange?: (args: {
     fieldName: string;
     prevValue: any;
     value: any;
@@ -76,6 +78,7 @@ export type Options<T> = {
   onSubmit?: (values: T, form: FormContextType) => void;
   initialValues?: T;
   validations?: Validations<T>;
+  enableReinitialize?: boolean;
 };
 
 export type ErrorRecord<T> = Partial<Record<keyof T, string>>;
