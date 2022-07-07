@@ -1,4 +1,4 @@
-import { ObjectSchema, Shape } from 'yup';
+import { ObjectSchema, Shape } from "yup";
 
 export type FormContextType = {
   values: Record<string, any>;
@@ -13,7 +13,7 @@ export type FormContextType = {
   resetValues: (args: Partial<any>) => void;
   validateForm: (
     values: any,
-    submit: (values: any, form: any) => void,
+    submit: (values: any, form: any) => void
   ) => Promise<void>;
 };
 
@@ -47,8 +47,10 @@ export type FormProviderProps<T> = {
   children: React.ComponentType<{
     values: T;
     touched: Partial<Record<keyof T, boolean>>;
+    errors: Partial<Record<keyof T, string>>;
     isValid: boolean;
     handleSubmit: () => void;
+    setValues: (value: Partial<T>) => void;
   }>;
 };
 
@@ -90,16 +92,14 @@ export type FormErrors = { inner: { path: string; message: string }[] };
 type ComponentProps = {
   error?: string;
   value: any;
-  onChange?: () => void;
+  onChange?: (value: any) => void;
   onBlur?: () => void;
   [x: string]: any;
-}
+};
 
 export interface FormFieldProps {
   component: React.ComponentType<ComponentProps>;
   name: string;
   children?: React.ReactNode;
-  onChangeProp?: string;
-  disabled: boolean;
   [x: string]: any;
 }

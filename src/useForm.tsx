@@ -1,13 +1,13 @@
 // @ts-ignore
-import React, { useState, useEffect } from 'react';
-import { useHelper } from './useHelper';
+import React, { useState, useEffect } from "react";
+import { useHelper } from "./useHelper";
 import {
   ErrorRecord,
   FieldError,
   FormErrors,
   Options,
   TouchedRecord,
-} from './types';
+} from "./types";
 
 export const useForm = <T extends Record<string, any>>(options: Options<T>) => {
   const [data, setData] = useState((options?.initialValues || {}) as T);
@@ -43,11 +43,11 @@ export const useForm = <T extends Record<string, any>>(options: Options<T>) => {
   });
 
   const setErrorsHelper = useHelper((errObj: Partial<ErrorRecord<T>>) =>
-    setErrors({ ...errors, ...errObj }),
+    setErrors({ ...errors, ...errObj })
   );
 
   const setTouchedHelper = useHelper((touchedObj: Partial<TouchedRecord<T>>) =>
-    setTouched({ ...touched, ...touchedObj }),
+    setTouched({ ...touched, ...touchedObj })
   );
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export const useForm = <T extends Record<string, any>>(options: Options<T>) => {
       if (options.initialTouched) {
         const newTouched = Object.keys(data).reduce(
           (acc, key) => ({ ...acc, [key]: true }),
-          {},
+          {}
         );
         setTouchedHelper(newTouched);
       }
@@ -82,7 +82,7 @@ export const useForm = <T extends Record<string, any>>(options: Options<T>) => {
         [key]: undefined,
       };
       setErrors(messages);
-      setIsValid(Object.values(messages).filter(e => !!e).length === 0);
+      setIsValid(Object.values(messages).filter((e) => !!e).length === 0);
     } catch (err) {
       setErrors({
         ...errors,
@@ -94,7 +94,7 @@ export const useForm = <T extends Record<string, any>>(options: Options<T>) => {
 
   const validateForm = async (
     values: T,
-    submit: (values: T, form: any) => void = () => {},
+    submit: (values: T, form: any) => void = () => {}
   ) => {
     try {
       await options?.validations?.validate(values, { abortEarly: false });

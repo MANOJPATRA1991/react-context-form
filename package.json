@@ -1,6 +1,6 @@
 {
   "name": "react-context-perf-form",
-  "version": "1.3.2",
+  "version": "1.4.2",
   "description": "Basic react form builder that is optimised to be blazing fast",
   "main": "dist/index.js",
   "scripts": {

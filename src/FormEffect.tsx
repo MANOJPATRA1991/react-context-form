@@ -1,9 +1,8 @@
 // @ts-ignore
-import React, { useEffect } from 'react';
-import { usePrevious } from './usePrevious';
-import { useFormContext } from './FormContext';
-import { FormEffectProps } from './types';
-
+import React, { useEffect } from "react";
+import { usePrevious } from "./usePrevious";
+import { useFormContext } from "./FormContext";
+import { FormEffectProps } from "./types";
 
 export const FormEffect = ({ onChange }: FormEffectProps) => {
   const form = useFormContext();

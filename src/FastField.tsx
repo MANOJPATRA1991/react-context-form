@@ -27,7 +27,6 @@ export const FastField = ({
   name,
   children,
   component,
-  onChangeProp = "onChange",
   ...props
 }: FormFieldProps): JSX.Element => {
   const Component = component;
@@ -40,7 +39,7 @@ export const FastField = ({
         error={meta.error && meta.touched ? meta.error : ""}
         value={field.value}
         onBlur={() => helpers.setTouched(true)}
-        {...{ [onChangeProp]: helpers.setValue }}
+        onChange={helpers.setValue}
         {...props}
       >
         {children}

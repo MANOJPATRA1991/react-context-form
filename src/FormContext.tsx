@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useMemo } from 'react';
-import { useForm } from './useForm';
-import { FormEffect } from './FormEffect';
-import { FormContextType, FormProviderProps } from './types';
+import React, { createContext, useContext, useMemo } from "react";
+import { useForm } from "./useForm";
+import { FormEffect } from "./FormEffect";
+import { FormContextType, FormProviderProps } from "./types";
 
 const FormContext = createContext<FormContextType>({
   values: {},
@@ -86,12 +86,14 @@ export const FormProvider = <T extends Record<string, any>>({
 
   return (
     <FormContext.Provider value={value}>
-      {onFormValueChange && (<FormEffect onChange={onFormValueChange} />)}
+      {onFormValueChange && <FormEffect onChange={onFormValueChange} />}
       <Fields
         values={values}
         touched={touched}
+        errors={errors}
         isValid={isValid}
         handleSubmit={handleSubmit}
+        setValues={setValues}
       />
     </FormContext.Provider>
   );

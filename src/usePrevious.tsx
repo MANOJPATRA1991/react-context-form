@@ -1,5 +1,5 @@
 // @ts-ignore
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 
 export const usePrevious = (value: any) => {
   const ref = useRef();
@@ -9,4 +9,4 @@ export const usePrevious = (value: any) => {
   }, [value]);
 
   return ref.current;
-}
+};
